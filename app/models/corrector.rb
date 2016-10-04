@@ -22,8 +22,7 @@ class Corrector
         corrected << { text: result['new_text'], fixed: true, index: fixed_locations.size - 1 }
         location += lines[i].size + 1
       end
-
-      build_result(corrected, fixed_locations, text.end_with?('.'))
+      build_result(corrected, fixed_locations, text.scan(/\.+$/).last.to_s)
     end
 
     # Requirement: it contains exactly one space AFTER a period between sentences
@@ -46,11 +45,9 @@ class Corrector
 
 
     # This method is tested indirectly in the method correct, so there is no need to write tests.
-    def build_result(corrected, fixed_locations, end_with_dot = false)
+    def build_result(corrected, fixed_locations, end_text = '')
       corrected.map! { |x| {text: x[:text] + '.', fixed: x[:fixed], index: x[:index] } }
-      unless  end_with_dot
-        corrected.last[:text] = corrected.last[:text][0, corrected.last[:text].size - 1]
-      end
+      corrected.last[:text] = corrected.last[:text][0, corrected.last[:text].size - 1] + end_text
       corrected_text = corrected.map { |x| x[:text] }.join('')
 
       {

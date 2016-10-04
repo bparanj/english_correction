@@ -68,6 +68,14 @@ describe Corrector do
       expect(result['fixed_locations'].to_json).to eql([{ operation: :added, delta: ' ', location: 22}].to_json)
     end
 
+    it 'corrects the text and returns result for text with error (added), many . at the end' do
+      result = Corrector.correct('This is a sample text.Next sentence...')
+
+      expect(result.is_a? Hash).to be true
+      expect(result['corrected_text']).to eql('This is a sample text. Next sentence...')
+      expect(result['fixed_locations'].to_json).to eql([{ operation: :added, delta: ' ', location: 22}].to_json)
+    end
+
     it 'corrects the text and returns result for text with error (added), no . at the end, with many spaces' do
       result = Corrector.correct('This is a sample text.Next sentence.   ')
 
