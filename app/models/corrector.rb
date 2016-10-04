@@ -28,7 +28,7 @@ class Corrector
 
     # Requirement: it contains exactly one space AFTER a period between sentences
     # Don't have to check about space or anything before the dot
-    # Don't have to check .. (The sentence between 2 . is blank)
+    # Don't have to check .. (The sentence between 2 . is blank) and other cases of blank sentence
     def correct_sentence(sentence)
       result = {}
       return result if sentence.blank? || sentence.match(/^\s(\S+)/) || sentence.match(/^(\s+)$/)
@@ -44,6 +44,8 @@ class Corrector
       { operation: :removed, delta: ' ' * (m.to_s.size - 1), new_text: " #{m.post_match}"   }.with_indifferent_access
     end
 
+
+    # This method is tested indirectly in the method correct, so there is no need to write tests.
     def build_result(corrected, fixed_locations, end_with_dot = false)
       corrected.map! { |x| {text: x[:text] + '.', fixed: x[:fixed], index: x[:index] } }
       unless  end_with_dot
@@ -59,7 +61,3 @@ class Corrector
     end
   end
 end
-
-=begin
-  Each of the fixed_location will be a hash  { operation :added/:removed, delta: <added or removed text>, location: <location in text>  }
-=end

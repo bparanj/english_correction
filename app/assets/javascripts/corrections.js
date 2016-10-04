@@ -26,7 +26,7 @@ function sendCorrect() {
       }
       newText += text
     }
-    // Have no time for formatting
+
     content_div[0].innerHTML = newText
 
     content_text_div = $('#result_text')
@@ -51,9 +51,7 @@ function sendCorrect() {
 }
 
 form_ready = function() {
-  // $('#language_multi_select').val() give you selected values
   $( '#btn_correct' ).bind( 'click', sendCorrect)
-
 };
 
 // Turbo link has its own event
