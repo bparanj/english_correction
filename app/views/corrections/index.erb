@@ -3,7 +3,7 @@
     <div class='col-sm-2'><strong>Content: </strong></div><br/>
     <br/>
 
-    <textarea name="text[content]" id="text_content" class="col-sm-5 ui-corner-all"  rows='10'></textarea>
+    <textarea name="text[content]" id="text_content" class="col-sm-10 ui-corner-all"  rows='10'></textarea>
     <% 11.times { %> <br/><% } %>
 
     <div style="float: left;">
@@ -13,14 +13,12 @@
       </buton>
     </div>
   <% end %>
-</div>
 
-<% 5.times { %> <br/><% } %>
-<div class="container">
- <div id='request_error' class="hidden"></div>
- <strong>Corrected Text with deltas:</strong><br/>
- <div id='result' class="row"></div>
- <% 2.times { %> <br/><% } %>
- <strong>Corrected Text:</strong><br/>
- <div id='result_text' class="row"></div>
+  <% 5.times { %> <br/><% } %>
+  <div id='request_error' class="hidden"></div>
+  <strong>Corrected Text with deltas:</strong><br/>
+  <div id='result' class="row"></div>
+  <% 2.times { %> <br/><% } %>
+  <strong>Corrected Text:</strong><br/>
+  <div id='result_text' class="row"></div>
 </div>
